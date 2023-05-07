@@ -1,13 +1,137 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <title>Company</title>
-  <base href="/">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <meta name="description" content="" />
+  <meta name="author" content="" />
+  <title>Simple Sidebar - Start Bootstrap Template</title>
+  <!-- Favicon-->
+  <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+  <!-- Core theme CSS (includes Bootstrap)-->
+  <link href="css/styles.css" rel="stylesheet" />
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 </head>
 <body>
-  <app-root></app-root>
+<div class="d-flex" id="wrapper">
+  <!-- Sidebar-->
+  <div class="border-end bg-white" id="sidebar-wrapper">
+    <div class="sidebar-heading border-bottom bg-light">Company X </div>
+    <div class="list-group list-group-flush">
+
+      <ul>
+        <li><a routerLink="/employees" class="list-group-item list-group-item-action bg-light"
+               (click)="showEmployeesTable()">Employees</a></li>
+        <li><a routerLink="/leaves" class="list-group-item list-group-item-action bg-light">Leaves</a></li>
+        <li><a routerLink="/expenses" class="list-group-item list-group-item-action bg-light">Expenses</a></li>
+      </ul>
+
+    </div>
+  </div>
+  <div id="page-content-wrapper">
+    <div class="container-fluid" *ngIf="showEmployees">
+      <h1>Employees</h1>
+      <button class="btn btn-primary">Add</button>
+      <div class="form-group">
+        <input type="text" class="form-control" placeholder="Filter">
+      </div>
+      <table class="table table-striped">
+        <thead>
+        <tr>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>Phone Number</th>
+          <th>Address</th>
+          <th>Age</th>
+          <th>Gender</th>
+          <th></th>
+          <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let employee of employees">
+          <td>{{ employee.firstName }}</td>
+          <td>{{ employee.lastName }}</td>
+          <td>{{ employee.phoneNumber }}</td>
+          <td>{{ employee.address }}</td>
+          <td>{{ employee.age }}</td>
+          <td>{{ employee.gender }}</td>
+          <td><button class="btn btn-primary">Edit</button></td>
+          <td><button class="btn btn-danger">Delete</button></td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+<!--  <button class="btn btn-primary" (click)="showAddEmployeeModal()">Add</button>-->
+
+  <div class="modal fade" id="addEmployeeModal" tabindex="-1" role="dialog" aria-labelledby="addEmployeeModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="addEmployeeModalLabel">Add Employee</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="form-group">
+              <label for="firstName">First Name</label>
+              <input type="text" class="form-control" id="firstName" [(ngModel)]="newEmployee.firstName">
+            </div>
+            <div class="form-group">
+              <label for="lastName">Last Name</label>
+              <input type="text" class="form-control" id="lastName" [(ngModel)]="newEmployee.lastName">
+            </div>
+            <div class="form-group">
+              <label for="departmentId">Department ID</label>
+              <input type="text" class="form-control" id="departmentId" [(ngModel)]="newEmployee.departmentId">
+            </div>
+            <div class="form-group">
+              <label for="phoneNumber">Phone Number</label>
+              <input type="text" class="form-control" id="phoneNumber" [(ngModel)]="newEmployee.phoneNumber">
+            </div>
+            <div class="form-group">
+              <label for="age">Age</label>
+              <input type="text" class="form-control" id="age" [(ngModel)]="newEmployee.age">
+            </div>
+            <div class="form-group">
+              <label for="gender">Gender</label>
+              <input type="text" class="form-control" id="gender" [(ngModel)]="newEmployee.gender">
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+          <button type="button" class="btn btn-primary" (click)="addEmployee()">Save</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<!--  <button type="button" class="btn btn-danger" (click)="deleteEmployee(i)">-->
+<!--    <i class="fa-duotone fa-trash"></i>-->
+<!--  </button>-->
+
+<!--  <button type="button" class="btn btn-primary" (click)="showLeavesTable()">Leaves</button>-->
+
+<!--  <button type="button" class="btn btn-primary" (click)="showExpensesTable()">Expenses</button>-->
+
+  <ng-container *ngIf="showLeaves">
+    <!-- Code for the Leaves table goes here -->
+  </ng-container>
+
+  <ng-container *ngIf="showExpenses">
+    <!-- Code for the Expenses table goes here -->
+  </ng-container>
+
+</div>
+<!-- Bootstrap core JS-->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Core theme JS-->
+<script src="js/scripts.js"></script>
 </body>
 </html>
